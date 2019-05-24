@@ -214,6 +214,15 @@ export default [
           title: '自定义图标'
         },
         component: () => import('@/view/components/icons/icons.vue')
+      },
+      {
+        path: 'icons_page',
+        name: 'b2bUserInfo',
+        meta: {
+          icon: '_bear',
+          title: '用户列表'
+        },
+        component: () => import('@/view/userCenter/b2bUserInfo/list.vue')
       }
     ]
   },
