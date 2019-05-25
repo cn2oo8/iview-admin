@@ -45,8 +45,8 @@ module.exports = {
     port: 8081,
     proxy: {
       '/userCenter/': {
-        // target: 'http://localhost.shareyi.com:8093/',
-        // host: 'http://localhost.shareyi.com',
+        target: 'http://localhost.shareyi.com:8093/',
+        host: 'http://localhost.shareyi.com',
         secure: false,
         changeOrigin: true
       },
