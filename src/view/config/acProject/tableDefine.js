@@ -9,7 +9,7 @@ import dictSelect from '@/view/components/dict/DictSelect'
 import dictCheckbox from '@/view/components/dict/DictCheckBox'
 
 const searchFormRules = {
-  id: [{ type: 'integer', required: true, message: 'id不能为空', trigger: 'blur' }],
+  id: [{ type: 'string', required: false, message: 'id不能为空', trigger: 'blur' }],
   name: [{ type: 'string', required: false, message: '名称不能为空', trigger: 'blur' }],
   type: [{ type: 'integer', required: false, message: '类型不能为空', trigger: 'blur' }],
   status: [{ type: 'integer', required: false, message: '状态不能为空', trigger: 'blur' }]
