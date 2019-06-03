@@ -107,13 +107,13 @@ export default [
         component: () => import('@/view/components/org-tree')
       },
       {
-        path: 'b2bUserInfo',
-        name: 'b2bUserInfo',
+        path: 'acProject',
+        name: 'acProject',
         meta: {
           icon: '_bear',
-          title: '用户列表'
+          title: 'acProject'
         },
-        component: () => import('@/view/userCenter/b2bUserInfo/list.vue')
+        component: () => import('@/view/config/acProject/list.vue')
       }
     ]
   },
