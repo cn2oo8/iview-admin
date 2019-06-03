@@ -3,7 +3,8 @@ const dictKinds = {
   STD_BOOLEAN_DICT: 'std_boolean_dict',
   STD_YESNO_DICT: 'std_yesno_dict',
   STD_PLATFORM_DICT: 'std_platform_dict',
-  STD_FK_TYPE_DICT: 'std_fk_type_dict'
+  STD_FK_TYPE_DICT: 'std_fk_type_dict',
+  acProject_type_DICT: 'acProject_type_DICT'
 }
 
 export default {
@@ -114,6 +115,22 @@ export default {
       'sortNum': 1,
       'cssType': 'green'
     }
+    ],
+    'acProject_type_DICT': [
+      {
+        'itemName': '本地',
+        'kind': 'acProject_type_DICT',
+        'sortNum': 1,
+        'itemKey': '1',
+        'cssType': 'default'
+      },
+      {
+        'itemName': '仓库',
+        'kind': 'acProject_type_DICT',
+        'sortNum': 2,
+        'itemKey': '2',
+        'cssType': 'default'
+      }
     ]
   }
 }
