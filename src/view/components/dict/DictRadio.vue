@@ -1,15 +1,13 @@
 <template>
   <span>
      <RadioGroup v-model="radioModel" @on-change="updateValue" :size="size" :type="type">
-        <Radio v-for="item in dictItems" :label="item.itemName" :key="item.itemKey" :disabled="disabled"></Radio>
+        <Radio v-for="item in dictItems" :label="item.itemKey" :key="item.itemKey" :disabled="disabled">{{item.itemName}}</Radio>
     </RadioGroup>
   </span>
 </template>
 <script>
 import { transferString, transferNumber } from '@/libs/renderUtil.js'
 import constants from '@/constants/constants'
-
-var _ = require('underscore')
 
 export default {
   name: 'DictRadio',
@@ -54,7 +52,7 @@ export default {
   data () {
     var model = transferString(this.value)
     return {
-      radioModel: null,
+      radioModel: model,
       model: model,
       dictItems: []
     }
@@ -83,18 +81,13 @@ export default {
   watch: {
     value (newVal) {
       newVal = transferString(newVal)
-      let name = this.transToName(newVal)
-      if (name === null || this.radioModel === name) {
-        return
-      }
-      this.radioModel = name
+      this.radioModel = newVal
     },
     radioModel: function (newVal) {
-      let transKey = this.transToKey(newVal)
-      if (transKey === null || this.model === transKey) {
+      if (newVal === null || this.model === newVal) {
         return
       }
-      this.model = transKey
+      this.model = newVal
       this.updateValue()
     }
   },
@@ -108,23 +101,7 @@ export default {
     },
     loadDict (data) {
       this.dictItems = data
-      let name = this.transToName(this.model)
-      if (name === null || this.radioModel === name) {
-        return
-      }
-      this.radioModel = name
-    },
-    transToName (key) {
-      let dictItem = _.find(this.dictItems, function (item) {
-        return item.itemKey === key
-      })
-      return dictItem ? dictItem.itemName : null
-    },
-    transToKey (name) {
-      let dictItem = _.find(this.dictItems, function (item) {
-        return item.itemName === name
-      })
-      return dictItem ? dictItem.itemKey : null
+      this.radioModel = this.model
     }
   }
 }
