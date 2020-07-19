@@ -118,6 +118,35 @@ export default [
     ]
   },
   {
+    path: '/devComponent',
+    name: 'devComponent',
+    meta: {
+      icon: 'md-menu',
+      title: '开发组件'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'formBuilder',
+        name: 'formBuilder',
+        meta: {
+          icon: 'md-funnel',
+          title: '表单构建器'
+        },
+        component: () => import('@/view/development/form-builder-page.vue')
+      },
+      {
+        path: 'other',
+        name: 'other',
+        meta: {
+          icon: 'md-funnel',
+          title: '其它待开发'
+        },
+        component: () => import('@/view/development/form-builder-page.vue')
+      }
+    ]
+  },
+  {
     path: '/error_logger',
     name: 'error_logger',
     meta: {
