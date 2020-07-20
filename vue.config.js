@@ -44,14 +44,14 @@ module.exports = {
     disableHostCheck: true,
     port: 8081,
     proxy: {
-      '/userCenter/': {
-        target: 'http://localhost.shareyi.com:8093/',
+      '/conf/': {
+        target: 'http://localhost.shareyi.com:8098/',
         host: 'http://localhost.shareyi.com',
         secure: false,
         changeOrigin: true
       },
-      '/userAuth/': {
-        target: 'http://localhost.shareyi.com:8093/',
+      '/config/': {
+        target: 'http://localhost.shareyi.com:8098/',
         host: 'http://localhost.shareyi.com',
         secure: false,
         changeOrigin: true

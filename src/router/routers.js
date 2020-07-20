@@ -1,5 +1,4 @@
 import Main from '@/components/main'
-import parentView from '@/components/parent-view'
 
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
@@ -113,7 +112,7 @@ export default [
           icon: '_bear',
           title: 'acProject'
         },
-        component: () => import('@/view/config/acProject/list.vue')
+        component: () => import('@/view/conf/acProject/list.vue')
       }
     ]
   },

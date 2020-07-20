@@ -1,10 +1,10 @@
 export default {
-  'config': {
+  'conf': {
     'acProject': {
-      'list': '/config/acProject/list',
-      'add': '/config/acProject/add',
-      'update': '/config/acProject/update',
-      'delete': '/config/acProject/delete'
+      'list': '/conf/acProject/list',
+      'add': '/conf/acProject/add',
+      'update': '/conf/acProject/update',
+      'delete': '/conf/acProject/delete'
     }
   }
 }
