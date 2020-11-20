@@ -127,6 +127,9 @@ export default {
           value: v,
           label: selectText
         })
+        this.$emit('on-change', {
+          value: v
+        })
       }
     },
     refresh () {

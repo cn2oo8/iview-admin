@@ -22,14 +22,14 @@ export default {
           'groupKey': 'group1',
           groupItemList: [
             {
-              itemKey: 'testKey1',
-              itemName: '测试key1',
-              itemType: 'input'
+              dictKey: 'testKey1',
+              dictName: '测试key1',
+              dictType: 'input'
             },
             {
-              itemKey: 'testKey1_1',
-              itemName: '测试多行输入框',
-              itemType: 'textarea'
+              dictKey: 'testKey1_1',
+              dictName: '测试多行输入框',
+              dictType: 'textarea'
             }
           ]
         },
@@ -38,9 +38,9 @@ export default {
           'groupKey': 'group2',
           groupItemList: [
             {
-              itemKey: 'testKey2',
-              itemName: '测试key2',
-              itemType: 'radio',
+              dictKey: 'testKey2',
+              dictName: '测试key2',
+              dictType: 'radio',
               dictKind: 'dict_std_status'
             },
             {
@@ -64,13 +64,19 @@ export default {
                 'cssType': 'green'
               }, {
                 kind: 'testDict',
-                itemKey: '-1',
+                itemKey: '2',
                 'itemName': '测试字典2',
                 'parentKind': '',
                 'parentKey': '',
                 'sortNum': 2,
                 'cssType': 'red'
               }]
+            },
+            {
+              itemKey: 'testKey5',
+              itemName: '测试key45',
+              itemType: 'checkbox',
+              dictKind: 'dict_std_status'
             }
           ]
         }
@@ -82,7 +88,7 @@ export default {
         'testKey1': '测试纸1',
         'testKey2': '1',
         'testKey3': '1',
-        'testKey4': '1'
+        'testKey4': ['1', '2']
       }
     }
   },

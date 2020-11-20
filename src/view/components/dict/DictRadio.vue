@@ -1,22 +1,20 @@
 <template>
   <span>
-    <CheckboxGroup v-model="model" @on-change="updateValue" :clearable="clearable">
-      <Checkbox v-for="item in dictItems" :label="item.itemKey" :key="item.itemKey" :disabled="disabled">{{ item.itemName }}</Checkbox>
-    </CheckboxGroup>
+     <RadioGroup v-model="radioModel" @on-change="updateValue" :size="size" :type="type">
+        <Radio v-for="item in dictItems" :label="item.itemKey" :key="item.itemKey" :disabled="disabled">{{item.itemName}}</Radio>
+    </RadioGroup>
   </span>
 </template>
 <script>
-import { transferString, toStringArray, transferNumber } from '@/libs/renderUtil.js'
+import { transferString, transferNumber } from '@/libs/renderUtil.js'
 import constants from '@/constants/constants'
 
-var _ = require('underscore')
-
 export default {
-  name: 'DictCheckBox',
+  name: 'DictRadio',
   props: {
     value: {
-      type: [String, Number, Array, Boolean],
-      default: []
+      type: [String, Number],
+      default: ''
     },
     number: {
       type: Boolean,
@@ -30,15 +28,7 @@ export default {
       type: String,
       default: ''
     },
-    clearable: {
-      type: Boolean,
-      default: false
-    },
     disabled: {
-      type: Boolean,
-      default: false
-    },
-    multiple: {
       type: Boolean,
       default: false
     },
@@ -46,14 +36,24 @@ export default {
       type: Boolean,
       default: false
     },
+    size: {
+      type: String,
+      default: 'default'
+    },
+    type: {
+      type: String,
+      default: null
+    },
     localDictItems: {
       type: Array,
       default: null
     }
   },
   data () {
+    var model = transferString(this.value)
     return {
-      model: toStringArray(this.value),
+      radioModel: model,
+      model: model,
       dictItems: []
     }
   },
@@ -70,7 +70,8 @@ export default {
     if (this.pid !== '') {
       key = this.kind + '_' + this.pid
     }
-    if (this.$store !== null && this.$store !== undefined) {
+
+    if (this.$store) {
       let promise = this.$store.dispatch(constants.types.LOAD_DICT_INFO, { kind: key })
       promise.then((data) => {
         _this.loadDict(data)
@@ -78,21 +79,16 @@ export default {
     }
   },
   watch: {
-    value () {
-      let newVal = transferString(this.value)
-      if (_.isArray(newVal)) {
-        if (_.isArray(this.model)) {
-          if (_.difference(newVal, this.model).length !== 0) {
-            this.model = newVal
-          }
-        } else {
-          this.model = newVal
-        }
-      } else {
-        if (newVal !== this.model) {
-          this.model = newVal
-        }
+    value (newVal) {
+      newVal = transferString(newVal)
+      this.radioModel = newVal
+    },
+    radioModel: function (newVal) {
+      if (newVal === null || this.model === newVal) {
+        return
       }
+      this.model = newVal
+      this.updateValue()
     }
   },
   methods: {
@@ -102,9 +98,11 @@ export default {
         v = transferNumber(v)
       }
       this.$emit('input', v)
+      this.$emit('on-change', v)
     },
     loadDict (data) {
       this.dictItems = data
+      this.radioModel = this.model
     }
   }
 }

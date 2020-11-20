@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import DictRadio from '../dict/DictRadio'
-import DictCheckBox from '../dict/DictCheckBox'
-import DictSelect from '../dict/DictSelect'
+import DictRadio from '@/view/components/dict/DictRadio'
+import DictCheckBox from '@/view/components/dict/DictCheckBox'
+import DictSelect from '@/view/components/dict/DictSelect'
 
 var _ = require('underscore')
 
