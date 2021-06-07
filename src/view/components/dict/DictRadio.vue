@@ -98,7 +98,6 @@ export default {
         v = transferNumber(v)
       }
       this.$emit('input', v)
-      this.$emit('on-change', v)
     },
     loadDict (data) {
       this.dictItems = data

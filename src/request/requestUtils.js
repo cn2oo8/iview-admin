@@ -1,8 +1,30 @@
 import axiosInstance from '@/request/axiosInstance'
+import axiosInstanceJson from '@/request/axiosInstanceJson'
 
-var _ = require('underscore')
+let _ = require('underscore')
 
-var requestUtils = {
+let requestUtils = {
+  getSubmit: function (_vue, url, param, successHandler, errorHandler, loading) {
+    let loadingKey = 'loading'
+    if (loading == null || loading === false) {
+      loadingKey = null
+    } else if (loading && _.isString(loading)) {
+      loadingKey = loading
+    }
+    if (loading && _vue[loadingKey] != null) {
+      _vue[loadingKey] = true
+    }
+    axiosInstance.get(url, param).then(response => {
+      if (loadingKey && loadingKey !== '') {
+        _vue[loadingKey] = false
+      }
+      var _this = _vue == null ? this : _vue
+      successHandler.call(_this, response.data)
+    }, error => {
+      var data = { 'success': false, 'message': '服务器异常，请联系管理员或重试！' }
+      requestUtils.fProcessResult(_vue, data, successHandler, errorHandler, loadingKey)
+    })
+  },
   postSubmit: function (_vue, url, param, successHandler, errorHandler, loading) {
     let loadingKey = 'loading'
     if (loading == null || loading === false) {
@@ -16,7 +38,23 @@ var requestUtils = {
     axiosInstance.post(url, param).then(response => {
       requestUtils.fProcessResult(_vue, response.data, successHandler, errorHandler, loadingKey)
     }, error => {
-      console.log(error)
+      var data = { 'success': false, 'message': '服务器异常，请联系管理员或重试！' }
+      requestUtils.fProcessResult(_vue, data, successHandler, errorHandler, loadingKey)
+    })
+  },
+  postSubmitJson: function (_vue, url, param, successHandler, errorHandler, loading) {
+    let loadingKey = 'loading'
+    if (loading == null || loading === false) {
+      loadingKey = null
+    } else if (loading && _.isString(loading)) {
+      loadingKey = loading
+    }
+    if (loading && _vue[loadingKey] != null) {
+      _vue[loadingKey] = true
+    }
+    axiosInstanceJson.post(url, param).then(response => {
+      requestUtils.fProcessResult(_vue, response.data, successHandler, errorHandler, loadingKey)
+    }, error => {
       var data = { 'success': false, 'message': '服务器异常，请联系管理员或重试！' }
       requestUtils.fProcessResult(_vue, data, successHandler, errorHandler, loadingKey)
     })
@@ -37,7 +75,6 @@ var requestUtils = {
     axiosInstance.post(url, param, config).then(response => {
       requestUtils.fProcessResult(_vue, response.data, successHandler, errorHandler, loadingKey)
     }, error => {
-      console.log(error)
       var data = { 'success': false, 'message': '服务器异常，请联系管理员或重试！' }
       requestUtils.fProcessResult(_vue, data, successHandler, errorHandler, loadingKey)
     })
@@ -46,7 +83,7 @@ var requestUtils = {
     if (loadingKey && loadingKey !== '') {
       _vue[loadingKey] = false
     }
-    var _this = _vue == null ? this : _vue
+    var _this = (_vue == null ? this : _vue)
     if (data) {
       if (data['success'] && data['success'] === true) {
         successHandler.call(_this, data)
@@ -58,11 +95,11 @@ var requestUtils = {
           if (!sMessage || sMessage === '') {
             sMessage = '处理异常，请联系管理员！'
           }
-          _vue.$Modal.error({
-            title: '错误',
-            content: sMessage
-          })
-
+          // 延迟展示
+          /*    _vue.$Modal.error({
+                title: '错误',
+                content: sMessage
+              }) */
           _vue.$Message.error({
             content: sMessage,
             duration: 10

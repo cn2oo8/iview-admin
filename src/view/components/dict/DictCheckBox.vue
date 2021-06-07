@@ -82,7 +82,7 @@ export default {
       let newVal = transferString(this.value)
       if (_.isArray(newVal)) {
         if (_.isArray(this.model)) {
-          if (_.difference(newVal, this.model).length !== 0) {
+          if (_.difference(newVal, this.model).length !== 0 || this.model.length != newVal.length) {
             this.model = newVal
           }
         } else {
@@ -93,6 +93,9 @@ export default {
           this.model = newVal
         }
       }
+    },
+    localDictItems (newVal, oldVal) {
+      this.loadDict(newVal)
     }
   },
   methods: {
@@ -102,7 +105,6 @@ export default {
         v = transferNumber(v)
       }
       this.$emit('input', v)
-      this.$emit('on-change', v)
     },
     loadDict (data) {
       this.dictItems = data

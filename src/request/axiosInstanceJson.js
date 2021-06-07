@@ -1,16 +1,14 @@
 import iView from 'iview'
 import axios from 'axios'
-import Qs from 'qs'
 import router from '@/router'
 
 const axiosInstance = axios.create({
   transformRequest: [function (data) {
-    let postData = Qs.stringify(data)
-    return postData
+    return JSON.stringify(data)
   }],
-  timeout: 1800000,
+  timeout: 180000,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/json;'
   }
 })
 
@@ -56,5 +54,4 @@ axiosInstance.interceptors.response.use(response => {
   return Promise.reject(error)
 })
 
-// mock.mock(axiosInstance)
 export default axiosInstance
